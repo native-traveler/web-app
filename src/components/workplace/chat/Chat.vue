@@ -1,46 +1,51 @@
 <template>
 
-  <v-container fluid>
-    <v-layout column class="chat__main-layout">
+  <v-container fluid class="chat__container">
 
-      <div class="chat__messages" ref="messages">
-        <chat-message
-                v-for="message in messages"
-                v-bind:message="message"
-                v-bind:key="message.id"
-        ></chat-message>
+    <v-card class="chat__ribbon">
+      <div class="chat__messages-container" ref="messages">
+        <div class="chat__messages">
+          <chat-message
+                  v-for="message in messages"
+                  v-bind:message="message"
+          ></chat-message>
+        </div>
       </div>
 
-      <div class="chat__input elevation-8">
-        <v-layout row>
 
-          <div class="chat__attach-file">
-            <v-btn icon class="black--text text--lighten-2">
-              <v-icon>attach_file</v-icon>
-            </v-btn>
-          </div>
+      <div class="chat__input-row">
+        <div class="chat__input">
+          <v-layout row>
 
-          <div class="chat__input-area">
-            <v-text-field
-                    ref="input"
-                    name="chat__input"
-                    placeholder="Введите сообщение"
-                    multi-line
-                    rows="2"
-                    v-model="message"
-            ></v-text-field>
-          </div>
+            <div class="chat__attach-file">
+              <v-btn icon class="black--text text--lighten-2">
+                <v-icon>attach_file</v-icon>
+              </v-btn>
+            </div>
 
-          <div class="chat__send">
-            <v-btn icon class="black--text text--lighten-2" @click="send()">
-              <v-icon>send</v-icon>
-            </v-btn>
-          </div>
+            <div class="chat__input-area">
+              <textarea type="text"
+                        ref="input"
+                        name="chat__input"
+                        placeholder="Введите сообщение"
+                        multi-line
+                        rows="1"
+                        v-model="message"
+              ></textarea>
+            </div>
 
-        </v-layout>
+            <div class="chat__send">
+              <v-btn icon class="black--text text--lighten-2" @click="send()">
+                <v-icon>send</v-icon>
+              </v-btn>
+            </div>
+
+          </v-layout>
+        </div>
       </div>
 
-    </v-layout>
+    </v-card>
+
   </v-container>
 
 </template>
@@ -60,15 +65,19 @@
         },
         set (value) {
           this.$store.commit('updateMessage', value);
+          this.resizeInput();
         }
       }
     },
     methods: {
+      resizeInput: function () {
+        this.$refs.input.setAttribute('rows', 3);
+      },
       send: function () {
         if (this.$store.getters.message) {
           this.$store.commit('send');
         } else {
-          this.$refs.input.$refs.input.focus();
+          this.$refs.input.focus();
         }
       },
       scrollMessageDown: function () {
@@ -77,41 +86,57 @@
       }
     },
     updated: function () {
-      this.$refs.input.$refs.input.focus();
+      this.$refs.input.focus();
     },
     components: {ChatMessage}
   };
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
-  .container {
-    padding: 0;
+  .chat__container {
+    margin: 64px 0 0 0;
+    height: calc(100vh - 64px);
+    background: #b3e5fc url('/static/images/bg.png') repeat 0 0;
+    position: relative;
   }
 
-  .chat__main-layout {
-    height: calc(100vh - 114px);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .chat__messages {
-    height: calc(100vh - 211px);
-    overflow: auto;
+  .chat__input-row {
+    width: 100%;
+    padding: 10px 0 8px 0;
+    flex-direction: row;
+    border-top: 2px solid #311b92;
+    background-color: #c4bbec;
   }
 
   .chat__input-area {
     width: 100%;
+
+    /deep/ textarea {
+      line-height: 18px;
+      background-color: #fff;
+      width: 100%;
+      padding: 10px 5px;
+      resize: none;
+    }
   }
 
-  .chat__input {
-    position: absolute;
-    bottom: 0;
-    z-index: 4;
-    background-color: #fff;
+  .chat__ribbon {
     width: 100%;
+    bottom: 100px;
     max-width: 900px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+  }
+
+  .chat__messages-container {
+    max-height: calc(100vh - 64px);
+    padding: 0 15px;
+    overflow: auto;
+  }
+
+  .chat__messages {
   }
 
 </style>

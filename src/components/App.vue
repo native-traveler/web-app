@@ -1,9 +1,15 @@
 <template>
 
-  <v-app>
+  <v-app toolbar--fixed toolbar>
 
     <template v-if="showToolbar()">
-      <v-toolbar class="primary">
+      <v-toolbar
+              class="primary"
+              absolute
+              dark
+              scroll-off-screen
+              scroll-target="#main"
+      >
         <v-toolbar-side-icon class="white--text" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title class="white--text">{{ appTitle }}</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -20,7 +26,7 @@
       </v-navigation-drawer>
     </template>
 
-    <main>
+    <main id="main">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
@@ -61,8 +67,11 @@
 
 <style scoped lang="scss">
 
+  .application {
+    overflow: hidden;
+  }
+
   .application--light {
-    background-color: #fff;
     div {
       color: red;
     }

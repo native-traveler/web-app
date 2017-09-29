@@ -13,7 +13,7 @@ const store = new Vuex.Store({
       ROUTE_WORKPLACE: 'workplace'
     },
     messages: ApiService.getChatMessages(),
-    message: '123'
+    message: null
   },
   getters: {
     messages (state) {
@@ -27,7 +27,7 @@ const store = new Vuex.Store({
     send (state) {
       state.messages.push({
         id: 1,
-        user_id: 2,
+        user_id: 1,
         text: state.message
       });
       state.message = '';
