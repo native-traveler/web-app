@@ -20,9 +20,7 @@
             <v-layout row class="chat__input-row">
 
               <div class="chat__attach-file">
-                <v-btn icon class="black--text text--lighten-2">
-                  <v-icon>attach_file</v-icon>
-                </v-btn>
+                <attach></attach>
               </div>
 
               <div class="chat__input-area">
@@ -53,69 +51,72 @@
 </template>
 
 <script>
-  import ChatMessage from '../ChatMessage';
+  import ChatMessage from '../ChatMessage'
+  import Attach from '../attach/Attach'
 
   export default {
     name: 'chat',
     data: function () {
       return {
         textareaRows: 1
-      };
+      }
     },
     computed: {
       messages () {
-        return this.$store.getters.messages;
+        return this.$store.getters.messages
       },
       message: {
         get () {
-          return this.$store.getters.message;
+          return this.$store.getters.message
         },
         set (value) {
-          this.$store.commit('updateMessage', value);
-          this.resizeInput();
+          this.$store.commit('updateMessage', value)
+          this.resizeInput()
         }
       }
     },
     methods: {
       resizeInput: function () {
-        const lineBreaks = this.message.match(/\n/g);
-        let linesToAdd = 0;
+        const lineBreaks = this.message.match(/\n/g)
+        let linesToAdd = 0
 
         // Если есть новые строки
         if (!lineBreaks) {
-          this.textareaRows = 1;
+          this.textareaRows = 1
         } else if (lineBreaks.length < 3) {
           // Увеличение textarea
-          linesToAdd = lineBreaks.length;
-          this.textareaRows = 1 + linesToAdd;
+          linesToAdd = lineBreaks.length
+          this.textareaRows = 1 + linesToAdd
         }
 
         if (this.textareaRows > 1) {
-          const $textarea = this.$refs.input;
-          $textarea.scrollTop = $textarea.scrollHeight;
+          const $textarea = this.$refs.input
+          $textarea.scrollTop = $textarea.scrollHeight
         }
+
+        this.scrollMessageDown();
       },
       send: function () {
         if (this.$store.getters.message) {
-          this.$store.commit('send');
+          this.$store.commit('send')
         } else {
-          this.$refs.input.focus();
+          this.$refs.input.focus()
         }
-        this.resizeInput();
+        this.resizeInput()
       },
       scrollMessageDown: function () {
-        const $messages = this.$refs.messages;
-        $messages.scrollTop = $messages.scrollHeight;
+        const $messages = this.$refs.messages
+        $messages.scrollTop = $messages.scrollHeight
       },
       mounted: function () {
-        this.$refs.input.scrollTop = this.$refs.input.scrollHeight;
+        this.$refs.input.scrollTop = this.$refs.input.scrollHeight
       }
     },
     updated: function () {
-      this.$refs.input.focus();
+      this.$refs.input.focus()
     },
-    components: {ChatMessage}
-  };
+    components: {ChatMessage, Attach}
+  }
 
 </script>
 
