@@ -1,6 +1,6 @@
 <template>
 
-  <v-container v-resize="onResize" fluid class="chat__container">
+  <v-container fluid class="chat__container">
 
     <v-card class="chat__ribbon">
       <v-layout column>
@@ -77,9 +77,6 @@
       }
     },
     methods: {
-      onResize: function () {
-        alert(1);
-      },
       resizeInput: function () {
         const lineBreaks = this.message.match(/\n/g);
         let linesToAdd = 0;
