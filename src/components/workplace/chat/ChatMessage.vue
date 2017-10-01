@@ -32,6 +32,7 @@
     padding: 10px;
     max-width: 70%;
     text-align: left;
+    word-wrap: break-word;
   }
 
   .is-mine {

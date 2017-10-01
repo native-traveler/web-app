@@ -1,20 +1,14 @@
 <template>
 
-  <chat></chat>
+  <ribbon></ribbon>
 
 </template>
 
 <script>
-  import AdvertList from '@/components/workplace/advert/AdvertList';
-  import Chat from '@/components/workplace/chat/Chat';
+  import Ribbon from '@/components/workplace/chat/ribbon/Ribbon';
 
   export default {
-    data () {
-      return {
-        tabs: {advertTitle: 'Предложения', chatTitle: 'Чат'}
-      }
-    },
-    components: {AdvertList, Chat}
+    components: {Ribbon}
   }
 </script>
 

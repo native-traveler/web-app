@@ -27,7 +27,7 @@
     </template>
 
     <main id="main">
-      <v-container fluid>
+      <v-container fluid class="main-container">
         <router-view></router-view>
       </v-container>
     </main>
@@ -82,7 +82,7 @@
   }
 
   .application > main > .container {
-    min-height: calc(100vh - 64px);
+    height:100%;
   }
 
 </style>
