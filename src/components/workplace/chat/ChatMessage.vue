@@ -1,8 +1,13 @@
 <template>
 
-  <div v-bind:class="{ 'is-mine': isMine}">
-    <v-card v-bind:class="{'light-blue lighten-4': isMine }">
+  <div v-bind:class="{ 'chat-message__is-mine': isMine}">
+    <v-card>
+      <div>
         {{ message.text }}
+      </div>
+      <div class="chat-message__date">
+        {{ message.created | moment('DD.MM.YYYY') }}
+      </div>
     </v-card>
   </div>
 
@@ -16,28 +21,36 @@
       return {
         isMine: this.message.user_id === 1
       };
-    },
-    mounted: function () {
-      this.$parent.scrollMessageDown();
     }
   }
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
   .card {
     margin: 10px;
     display: inline-block;
-    padding: 10px;
+    padding: 5px 8px;
     max-width: 70%;
     text-align: left;
     word-wrap: break-word;
+    line-height: 18px;
   }
 
-  .is-mine {
+  .chat-message__is-mine {
     margin-left: auto;
     text-align: right;
+
+    .card {
+      background-color: #E3F2FD;
+    }
+  }
+
+  .chat-message__date {
+    text-align: right;
+    font-size: 12px;
+    color: #43a047;
   }
 
 </style>

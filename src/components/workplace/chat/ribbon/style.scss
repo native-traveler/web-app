@@ -1,5 +1,5 @@
 .chat__container {
-  background: #b3e5fc url('/static/images/bg.png') repeat 0 0;
+  background: #b3e5fc url('/static/images/bg.jpg') repeat 0 0;
 }
 
 .layout, .chat__container, .chat__ribbon {
@@ -8,10 +8,10 @@
 
 .chat__input-container {
   width: 100%;
-  padding: 5px 0;
+  padding: 3px 0 5px 0;
   flex-direction: row;
   background-color:#d7ccc8;
-  border:2px solid #bcaaa4;
+  border-top:2px solid #bcaaa4;
 }
 
 .chat__input-area {

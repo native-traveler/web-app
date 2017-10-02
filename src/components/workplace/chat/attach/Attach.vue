@@ -10,17 +10,33 @@
           <div class="headline">Выбор файла</div>
         </v-card-title>
         <v-card-text>
-          <v-text-field prepend-icon="attach_file" single-line
-                        v-model="filename" :label="label" :required="required"
-                        @click.native="onFocus"
-                        :disabled="disabled" ref="fileTextField"></v-text-field>
-          <input type="file" :accept="accept" :multiple="false" :disabled="disabled"
-                 ref="fileInput" @change="onFileChange">
+          <input
+                  type="file"
+                  ref="fileInput"
+                  @change="onFileChange"
+                  hidden
+          >
+          <v-btn
+                  primary
+                  @click.native="onClick"
+          >
+            Выберите файл
+          </v-btn>
+
+          <div class="attach__filename">{{ filename }}</div>
+
+          <div class="attach_preview">
+            <img
+                    v-if="imagePreviewData"
+                    v-bind:src="imagePreviewData"
+            >
+          </div>
+
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
-          <v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">Agree</v-btn>
+          <v-btn class="green--text darken-1" flat="flat" @click.native="dialog = false">Закрыть</v-btn>
+          <v-btn class="green--text darken-1" flat="flat" @click.native="apply">Добавить файл</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -31,76 +47,49 @@
 <script>
   export default {
     name: 'attach',
-    props: {
-      value: {
-        type: [Array, String]
-      },
-      accept: {
-        type: String,
-        default: '*'
-      },
-      label: {
-        type: String,
-        default: 'Please choose...'
-      },
-      required: {
-        type: Boolean,
-        default: false
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      multiple: {
-        type: Boolean, // not yet possible because of data
-        default: false
-      }
-    },
     data () {
       return {
         filename: '',
-        dialog: false
-      }
+        dialog: false,
+        imagePreviewData: null
+      };
     },
-    watch: {
-      value (v) {
-        this.filename = v
-      }
-    },
-    mounted () {
-      this.filename = this.value
-    },
-
     methods: {
-      getFormData (files) {
-        const data = new FormData();
-        [...files].forEach(file => {
-          data.append('data', file, file.name) // currently only one file at a time
-        })
-        return data
+      apply () {
+        this.dialog = false;
       },
-      onFocus () {
+      onClick () {
         if (!this.disabled) {
-          this.$refs.fileInput.click()
+          this.$refs.fileInput.click();
         }
       },
       onFileChange ($event) {
-        const files = $event.target.files || $event.dataTransfer.files
-        const form = this.getFormData(files)
+        const files = $event.target.files || $event.dataTransfer.files;
+//        const form = this.getFormData(files);
         if (files) {
           if (files.length > 0) {
-            this.filename = [...files].map(file => file.name).join(', ')
+            this.filename = [...files].map(file => file.name).join(', ');
+            this.showPicture(files[0]);
           } else {
-            this.filename = null
+            this.filename = null;
           }
         } else {
-          this.filename = $event.target.value.split('\\').pop()
+          this.filename = $event.target.value.split('\\').pop();
         }
-        this.$emit('input', this.filename)
-        this.$emit('formData', form)
+      },
+      showPicture (file) {
+        let reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+          this.imagePreviewData = reader.result;
+        });
+//        reader.addEventListener('error', () => {
+//        }, false);
+//
+        reader.readAsDataURL(file);
       }
     }
-  }
+  };
 
 </script>
 

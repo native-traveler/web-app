@@ -5,6 +5,7 @@ import store from '@/store';
 import App from '@/components/App';
 
 Vue.use(Vuetify);
+Vue.use(require('vue-moment'));
 Vue.config.productionTip = true;
 
 new Vue({
