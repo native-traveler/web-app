@@ -28,7 +28,7 @@
 
           <div class="attach_preview">
             <img
-                    v-if="isImage"
+                    v-if="isPicture"
                     v-bind:src="fileData"
             >
           </div>
@@ -61,13 +61,12 @@
       return {
         fileName: '',
         dialog: false,
-        isImage: false,
+        isPicture: false,
         fileData: null
       };
     },
     methods: {
       apply () {
-        debugger;
         const fileInfo = {
           isPicture: this.isPicture,
           fileName: this.fileName
@@ -101,7 +100,7 @@
 
         reader.addEventListener('load', () => {
           this.fileData = reader.result;
-          this.isImage = BaseHelper.isPicture(reader.result);
+          this.isPicture = BaseHelper.isPicture(reader.result);
         });
         reader.addEventListener('error', () => {
         }, false);
@@ -114,7 +113,7 @@
         if (isOpening) {
           this.fileName = null;
           this.fileData = null;
-          this.isImage = false;
+          this.isPicture = false;
         }
       }
     }

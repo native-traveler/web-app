@@ -1,21 +1,34 @@
 <template>
 
   <div v-bind:class="{ 'chat-message__is-mine': isMine}">
-    <v-card>
-      <div v-if="message.text" class="chat-message__text">
-        {{ message.text }}
-      </div>
-      <div v-if="message.isPicture" class="chat-message__image-container">
-        <img v-bind:src="message.fileData">
-      </div>
-      <div v-if="!message.isPicture && message.fileName" class="chat-message__filename">
-        <i class="material-icons icon">attach_file</i>
-        {{ message.fileName }}
-      </div>
-      <div class="chat-message__date">
-        {{ message.created | moment('DD.MM.YYYY') }}
-      </div>
-    </v-card>
+
+    <v-layout class="chat-message__flex-container" v-bind:class="{ 'chat-message--right': isMine}">
+
+      <v-avatar size="40px" v-if="!isMine">
+        <img src="https://placeimg.com/40/40/people/2" alt="">
+      </v-avatar>
+
+      <v-card elevation-14>
+        <div v-if="!isMine" class="chat-message__name">
+          Иван Торгов
+        </div>
+        <div v-if="message.text" class="chat-message__text">
+          {{ message.text }}
+        </div>
+        <div v-if="message.isPicture" class="chat-message__image-container">
+          <img v-bind:src="message.fileData">
+        </div>
+        <div v-if="!message.isPicture && message.fileName" class="chat-message__filename">
+          <i class="material-icons icon">attach_file</i>
+          {{ message.fileName }}
+        </div>
+        <div class="chat-message__date">
+          {{ message.created | moment('DD.MM.YYYY') }}
+        </div>
+      </v-card>
+
+    </v-layout>
+
   </div>
 
 </template>
@@ -43,6 +56,8 @@
     text-align: left;
     word-wrap: break-word;
     line-height: 18px;
+    background-color: #f1f1f1;
+    box-shadow: none;
   }
 
   .chat-message__is-mine {
@@ -56,7 +71,13 @@
 
   .chat-message__date {
     text-align: right;
-    font-size: 12px;
+    font-size: 10px;
+    color: #00838F;
+    line-height: 10px;
+    padding: 3px 0 0 0;
+  }
+
+  .chat-message__name {
     color: #43a047;
   }
 
@@ -71,6 +92,18 @@
 
   .chat-message__text {
     font-size:13px;
+  }
+
+  .avatar {
+    margin: 10px 0 0 5px;
+  }
+
+  .chat-message--right {
+    justify-content:flex-end !important;
+  }
+
+  .chat-message__flex-container {
+    align-items: flex-start;
   }
 
 </style>
