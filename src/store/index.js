@@ -32,6 +32,20 @@ const store = new Vuex.Store({
       });
       state.message = '';
     },
+    attach (state, fileInfo) {
+      const message = {
+        id: 1,
+        user_id: 1,
+        fileName: fileInfo.fileName
+      };
+
+      if (fileInfo.isPicture) {
+        message.isPicture = fileInfo.isPicture;
+        message.fileData = fileInfo.fileData;
+      }
+
+      state.messages.push(message);
+    },
     updateMessage (state, value) {
       state.message = value;
     }

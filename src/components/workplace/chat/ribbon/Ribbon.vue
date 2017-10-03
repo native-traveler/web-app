@@ -87,7 +87,6 @@
           linesToAdd = lineBreaks.length;
           this.textareaRows = 1 + linesToAdd;
           this.scrollMessageDown();
-          console.log('expand scroll');
         }
 
         if (this.textareaRows > 1) {
