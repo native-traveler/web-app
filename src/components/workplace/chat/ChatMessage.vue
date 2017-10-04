@@ -8,7 +8,7 @@
         <img src="https://placeimg.com/40/40/people/2" alt="">
       </v-avatar>
 
-      <v-card elevation-14>
+      <div class="chat-message">
         <div v-if="!isMine" class="chat-message__name">
           Иван Торгов
         </div>
@@ -25,7 +25,7 @@
         <div class="chat-message__date">
           {{ message.created | moment('DD.MM.YYYY') }}
         </div>
-      </v-card>
+      </div>
 
     </v-layout>
 
@@ -48,7 +48,7 @@
 
 <style scoped lang="scss">
 
-  .card {
+  .chat-message {
     margin: 10px;
     display: inline-block;
     padding: 5px 7px;
@@ -64,7 +64,7 @@
     margin-left: auto;
     text-align: right;
 
-    .card {
+    .chat-message {
       background-color: #E3F2FD;
     }
   }
