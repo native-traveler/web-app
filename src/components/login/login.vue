@@ -50,20 +50,4 @@
   }
 </script>
 
-<style scoped lang="scss">
-  .login__ribbon {
-    height: 180px;
-    width: 100%;
-  }
-
-  .login__card {
-    min-width: 250px;
-    max-width: 300px;
-    width: 80%;
-    margin: -100px auto 0 auto;
-  }
-
-  .container {
-    padding: 15px 0 0 0;
-  }
-</style>
+<style scoped lang="scss" src="./style.scss"></style>

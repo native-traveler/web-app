@@ -35,8 +35,8 @@
 </template>
 
 <script>
-  import Settings from '@/components/Settings'
-  import UserMenu from '@/components/UserMenu'
+  import Settings from '@/components/settings'
+  import UserMenu from '@/components/user-menu'
   import '@root/node_modules/vuetify/src/stylus/main.styl'
   import '@/styles/main.scss'
 

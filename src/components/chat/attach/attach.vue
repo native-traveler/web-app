@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import BaseHelper from '@/helpers/BaseHelper';
+  import BaseHelper from '@/helpers/base-helper';
 
   export default {
     name: 'attach',

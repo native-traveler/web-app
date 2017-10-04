@@ -50,8 +50,8 @@
 </template>
 
 <script>
-  import ChatMessage from '../ChatMessage';
-  import Attach from '../attach/Attach';
+  import ChatMessage from '@/components/chat/chat-message/chat-message';
+  import Attach from '@/components/chat/attach/attach';
 
   export default {
     name: 'chat',
