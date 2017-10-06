@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import app from '@/components/app';
-import login from '@/components/login';
-import entrance from '@/components/entrance';
-import registration from '@/components/registration';
+import app from '@/components/app/app';
+import login from '@/components/login/login';
+import entrance from '@/components/entrance/entrance';
+import registration from '@/components/registration/registration';
+import notFound from '@/components/not-found/not-found';
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ let router = new Router({
       path: '/registration',
       name: 'registration',
       component: registration
+    },
+    {
+      path: '*',
+      name: 'not-found',
+      component: notFound
     }
   ]
 });

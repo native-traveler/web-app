@@ -1,6 +1,6 @@
 v-app
   v-layout(column='')
-    template(v-if='showToolbar()')
+    template
       v-toolbar.primary(dark='')
         v-toolbar-side-icon.white--text(@click.stop='drawer = !drawer')
         v-toolbar-title.white--text {{ appTitle }}
@@ -9,3 +9,4 @@ v-app
       v-navigation-drawer(temporary='', v-model='drawer', overflow='', absolute='')
         settings
     v-container.main-container.flex(fluid='')
+      chat
