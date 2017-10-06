@@ -3,8 +3,8 @@ import '@/styles/main.styl';
 import settings from '@/components/settings';
 import userMenu from '@/components/user-menu';
 import ribbon from '@/components/app/chat/ribbon/ribbon';
-import chatMessage from '@/components/app/chat/chat-message';
-import attach from '@/components/app/chat/attach';
+import chatMessage from '@/components/app/chat/chat-message/chat-message';
+import attach from '@/components/app/chat/attach/attach';
 import chat from '@/components/app/chat/chat';
 
 Vue.component('chat', chat);

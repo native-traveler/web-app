@@ -1,0 +1,17 @@
+div(v-bind:class="{ 'chat-message__is-mine': isMine}")
+  v-layout.chat-message__flex-container(v-bind:class="{ 'chat-message--right': isMine}")
+    v-avatar(size='40px', v-if='!isMine')
+      img(src='https://placeimg.com/40/40/people/2', alt='')
+    .chat-message
+      .chat-message__name(v-if='!isMine')
+        | Иван Торгов
+      .chat-message__text(v-if='message.text')
+        | {{ message.text }}
+      .chat-message__image-container(v-if='message.isPicture')
+        img(v-bind:src='message.fileData')
+      .chat-message__filename(v-if='!message.isPicture && message.fileName')
+        i.material-icons.icon attach_file
+        router-link(to='/asdf')
+          .chat-message__link {{ message.fileName }}
+      .chat-message__date
+        | {{ message.created | moment('DD.MM.YYYY') }}

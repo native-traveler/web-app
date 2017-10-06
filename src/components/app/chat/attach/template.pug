@@ -1,0 +1,18 @@
+div
+  v-dialog(v-model='dialog', lazy='', absolute='')
+    v-btn.black--text.text--lighten-2(icon='', slot='activator')
+      v-icon attach_file
+    v-card
+      v-card-text
+        input(type='file', ref='fileInput', @change='onFileChange', hidden='')
+        v-layout.attach__button-attach
+          v-btn(primary='', @click.native='onClick')
+            | Нажмите для выбора файла
+        .attach__filename {{ fileName }}
+        .attach_preview
+          img(v-if='isPicture', v-bind:src='fileData')
+      v-card-actions
+        v-spacer
+        v-btn(flat='flat', @click.native='dialog = false') Закрыть
+        v-btn(primary='', flat='flat', @click.native='apply', v-if='fileName')
+          | Добавить файл
