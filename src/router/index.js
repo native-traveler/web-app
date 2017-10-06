@@ -1,17 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import chat from '@/components/chat/chat';
-import login from '@/components/login/login';
-import registration from '@/components/registration/registration';
+import app from '@/components/app';
+import login from '@/components/login';
+import entrance from '@/components/entrance';
+import registration from '@/components/registration';
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'chat',
-      component: chat
+      path: '/app',
+      name: 'app',
+      component: app
     },
     {
       path: '/login',
@@ -19,9 +21,28 @@ export default new Router({
       component: login
     },
     {
+      path: '/entrance',
+      name: 'entrance',
+      component: entrance
+    },
+    {
       path: '/registration',
       name: 'registration',
       component: registration
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  next();
+  // if (to.name !== 'login' && !router.store.getters.user) {
+  //   next({
+  //     path: '/login',
+  //     replace: true
+  //   });
+  // } else {
+  //   next();
+  // }
+});
+
+export default router;

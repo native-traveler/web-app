@@ -1,0 +1,24 @@
+div
+  v-flex.login__ribbon.blue
+  v-card.login__card
+    v-card-title
+      h3.headline.mb-0 Выбор языка
+      v-container(fluid='')
+        v-layout(column='')
+          v-flex
+            v-text-field(
+            name='input-1',
+            :label='loginLabel',
+            v-model='login'
+            )
+          v-flex
+            v-text-field(
+            name='input-1',
+            v-model='password',
+            :label='passwordLabel',
+            type='password'
+            )
+          v-flex
+            router-link(to='/login') Войти
+    v-card-actions
+      v-btn.green.white--text(@click="$router.push('/')") ЗАРЕГИСТРИРОВАТЬСЯ
