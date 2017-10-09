@@ -12,6 +12,10 @@ let router = new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      name: 'root'
+    },
+    {
       path: '/app',
       name: 'app',
       component: app
@@ -40,15 +44,21 @@ let router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  next();
-  // if (to.name !== 'login' && !router.store.getters.user) {
-  //   next({
-  //     path: '/login',
-  //     replace: true
-  //   });
-  // } else {
-  //   next();
-  // }
+  let isGuest = true;
+
+  if (to.name === 'root' && isGuest) {
+    next({
+      path: '/entrance',
+      replace: true
+    });
+  } else if (to.name === 'root' && !isGuest) {
+    next({
+      path: '/app',
+      replace: true
+    });
+  } else {
+    next();
+  }
 });
 
 export default router;

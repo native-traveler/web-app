@@ -3,14 +3,14 @@ v-container.chat__container(fluid='')
     v-layout(column='')
       v-flex.chat__messages-container(ref='messages')
         div
-          chat-message(v-for='message in messages', v-bind:message='message', v-bind:key='message.id')
+          chat-message(v-for='message in messages', :message='message', :key='message.id')
       .chat__input-container
         .chat__input
           v-layout.chat__input-row(row='')
             .chat__attach-file
               attach
             .chat__input-area
-              textarea(type='text', ref='input', name='chat__input', placeholder='Введите сообщение', v-bind:rows='textareaRows', v-model='message')
+              textarea(type='text', ref='input', name='chat__input', placeholder='Введите сообщение', :rows='textareaRows', v-model='message')
             .chat__send
               v-btn.black--text.text--lighten-2(icon='', @click='send()')
                 v-icon send

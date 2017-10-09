@@ -10,8 +10,6 @@ Vue.use(require('vue-moment'));
 Vue.config.productionTip = true;
 Vue.prototype.$axios = Axios;
 
-router.store = store;
-
 new Vue({
   el: '#app',
   store,
