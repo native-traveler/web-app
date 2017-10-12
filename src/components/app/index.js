@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import '@/styles/main.styl';
 import settings from '@/components/settings';
 import userMenu from '@/components/user-menu';
 import ribbon from '@/components/app/chat/ribbon/ribbon';

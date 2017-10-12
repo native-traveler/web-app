@@ -1,17 +1,63 @@
 v-app
   widget-article
-    v-card
-      v-card-title
-        h3 Выберите ваш язык
-        v-container(fluid)
+    div.entrance
+      v-scale-transition
+        v-container
+          v-layout(column)
+            div.title.entrance__section-title Ваш язык
+            v-flex
+              v-select(
+              v-if="showLanguageSelect",
+              autocomplete,
+              :items="languages",
+              v-model="languageId",
+              item-text="title",
+              item-value="id"
+              )
+          div(v-if="showChosenLanguage", @click="chooseLanguage").entrance__chosen-value.green--text
+            strong.title {{ languageTitle }}
+      div(v-if="showCityTitle").title.entrance__section-title {{ chooseCityTitle }}
+      v-layout(v-if="showCitySearching" column).entrance__loader
+        div.mt-2 Определение местоположения
+        v-progress-circular(indeterminate color="blue")
+      v-layout(v-if="showCityApplying" column).align-center.entrance__city_appliance
+        div.entrance__city-question Это ваш город?
+        div.title.entrance__chosen-value.green--text {{ cityTitle }}
+        v-layout.justify-center
+          v-btn(small, @click="cityApply") ДА
+          v-btn(small, @click="cityDecline") НЕТ
+      v-scale-transition
+        v-container
           v-layout(column)
             v-flex
               v-select(
-              :items="languages"
-              v-model="language"
-              class="input-group--focused"
-              item-text="title"
-              item-value="id"
+              v-if="showCitySelect",
+              autocomplete,
+              :items="cities",
+              v-model="cityId",
+              item-text="title",
+              item-value="id",
+              @input="setCity"
               )
-      v-card-actions
-        v-btn.blue.white--text(@click="$router.push('/')") ДАЛЕЕ
+          div(v-if="showChosenCity", @click="chooseCity").entrance__chosen-value.green--text
+            strong.title {{ cityTitle }}
+      v-scale-transition
+          v-container(v-if="showHotel")
+            v-layout(column)
+              div.title.entrance__section-title Выберите отель
+              v-flex
+                v-select(
+                v-if="showHotelSelect",
+                autocomplete,
+                :items="hotels",
+                v-model="hotelId",
+                item-text="title",
+                item-value="id"
+                )
+            div(v-if="showChosenHotel", @click="chooseHotel").entrance__chosen-value.green--text
+              strong.title {{ hotelTitle }}
+      v-layout(v-if="showButtonNext").justify-center
+        v-btn(color="primary", @click="nextStep") ДАЛЕЕ
+      v-fade-transition
+        v-layout(v-if="showButtonChat").justify-center
+          v-btn(color="primary", @click="$router.push('/app')") ВОЙТИ В ЧАТ

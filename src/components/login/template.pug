@@ -1,15 +1,12 @@
 v-app
-  v-flex.login__ribbon.blue
-  v-card.login__card
-    v-card-title(primary-title='')
-      h3.headline.mb-0 Вход
-      v-container(fluid='')
-        v-layout(column='')
+  widget-article
+      v-container
+        v-layout(column)
+          h3.headline.mb-0 Вход
           v-flex
-            v-text-field(name='input-1', :label='loginLabel', v-model='login')
+            v-text-field(name='login', :label='loginLabel', v-model='login')
           v-flex
-            v-text-field(name='input-1', v-model='password', :label='passwordLabel', type='password')
+            v-text-field(name='password', v-model='password', :label='passwordLabel', type='password')
           v-flex
             router-link(to='/registration') Зарегистрироваться
-    v-card-actions
-      v-btn.green.white--text(@click="$router.push('/app')") ВОЙТИ
+          v-btn.green.white--text(@click="$router.push('/app')") ВОЙТИ
